@@ -1,20 +1,15 @@
 package com.example.libroai;
 
 import android.util.Log;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import okhttp3.*;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.IOException;
 
 public class GeminiRestHelper {
-
-    private static final String API_KEY = "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";
+    private static final String API_KEY = "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";
     private static final String ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
 
     private final OkHttpClient client = new OkHttpClient();
@@ -25,61 +20,61 @@ public class GeminiRestHelper {
 
     public void getSuggestion(String prompt, ResponseCallback cb) {
         try {
-            JSONObject message = new JSONObject();
-            message.put("role", "user");
-            message.put("content", prompt);
+            JSONObject json = new JSONObject();
+            json.put("model", "mistralai/mistral-7b-instruct");
+            JSONArray messages = new JSONArray();
+            JSONObject userMessage = new JSONObject();
+            userMessage.put("role", "user");
+            userMessage.put("content", prompt);
+            messages.put(userMessage);
+            json.put("messages", messages);
 
-            JSONArray messagesArray = new JSONArray();
-            messagesArray.put(message);
-
-            JSONObject body = new JSONObject();
-            body.put("model", "mistralai/mistral-7b-instruct"); // ✅ FREE model
-            body.put("messages", messagesArray);
-
-            RequestBody reqBody = RequestBody.create(
-                    body.toString(),
-                    MediaType.get("application/json; charset=utf-8")
+            RequestBody requestBody = RequestBody.create(
+                    json.toString(),
+                    MediaType.parse("application/json")
             );
 
             Request request = new Request.Builder()
                     .url(ENDPOINT)
-                    .post(reqBody)
+                    .post(requestBody)
                     .addHeader("Authorization", "Bearer " + API_KEY)
-                    .addHeader("HTTP-Referer", "https://libroai.app") // just a name, not required to exist
-                    .addHeader("X-Title", "LibroAI Book Bot")
+                    .addHeader("HTTP-Referer", "https://libroai.example")
+                    .addHeader("X-Title", "LibroAI")
                     .build();
 
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    Log.e("OpenRouter", "Network error: " + e.getMessage(), e);
-                    cb.onResponse("Network error: " + e.getMessage());
+                    Log.e("OpenRouter", "Request failed: " + e.getMessage());
+                    cb.onResponse("Failed to connect: " + e.getMessage());
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    String resBody = response.body().string();
-                    Log.d("OpenRouter", "Code: " + response.code());
-                    Log.d("OpenRouter", "Body: " + resBody);
+                    String res = response.body().string();
+                    Log.d("OpenRouter", "Response Code: " + response.code());
+                    Log.d("OpenRouter", "Response Body: " + res);
 
                     if (response.code() != 200) {
-                        cb.onResponse("Error: " + resBody);
+                        cb.onResponse("Error " + response.code() + ": " + res);
                         return;
                     }
 
                     try {
-                        JSONObject json = new JSONObject(resBody);
-                        JSONArray choices = json.getJSONArray("choices");
-                        JSONObject msg = choices.getJSONObject(0).getJSONObject("message");
-                        String reply = msg.getString("content");
-                        cb.onResponse(reply.trim());
+                        JSONObject resObj = new JSONObject(res);
+                        JSONArray choices = resObj.getJSONArray("choices");
+                        String reply = choices.getJSONObject(0)
+                                .getJSONObject("message")
+                                .getString("content");
+                        cb.onResponse(reply);
                     } catch (Exception e) {
                         cb.onResponse("Parsing error: " + e.getMessage());
                     }
                 }
             });
-        } catch (Exception ex) {
-            cb.onResponse("Error forming request.");
+
+        } catch (Exception e) {
+            cb.onResponse("Error preparing request: " + e.getMessage());
         }
     }
 }
