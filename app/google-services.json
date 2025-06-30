@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "632501025228",
+    "project_id": "libroai-16cf2",
+    "storage_bucket": "libroai-16cf2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632501025228:android:690bf966b4cae3ada00569",
+        "android_client_info": {
+          "package_name": "com.example.libroai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4AGoZQJNGFLMPZb94o09cE1pIC2gyFDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
