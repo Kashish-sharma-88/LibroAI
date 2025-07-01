@@ -1,15 +1,20 @@
 package com.example.libroai;
 
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import okhttp3.*;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import com.example.libroai.BuildConfig;
+
 
 public class GeminiRestHelper {
-    private static final String API_KEY = "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";
+
     private static final String ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
 
     private final OkHttpClient client = new OkHttpClient();
@@ -37,14 +42,14 @@ public class GeminiRestHelper {
             Request request = new Request.Builder()
                     .url(ENDPOINT)
                     .post(requestBody)
-                    .addHeader("Authorization", "Bearer " + API_KEY)
+                    .addHeader("Authorization", "Bearer " + BuildConfig.OPENROUTER_API_KEY) // 🔐 from gradle
                     .addHeader("HTTP-Referer", "https://libroai.example")
                     .addHeader("X-Title", "LibroAI")
                     .build();
 
             client.newCall(request).enqueue(new Callback() {
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(@NonNull Call call, IOException e) {
                     Log.e("OpenRouter", "Request failed: " + e.getMessage());
                     cb.onResponse("Failed to connect: " + e.getMessage());
                 }

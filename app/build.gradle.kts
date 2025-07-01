@@ -6,16 +6,21 @@ plugins {
 android {
     namespace = "com.example.libroai"
     compileSdk = 35
-
     defaultConfig {
         applicationId = "com.example.libroai"
         minSdk = 30
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+        val openRouterKey = project.findProperty("OPENROUTER_API_KEY") ?: ""
+        buildConfigField("String", "OPENROUTER_API_KEY", "\"$openRouterKey\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    buildFeatures {
+        buildConfig = true
+    }
+
 
     buildTypes {
         release {
