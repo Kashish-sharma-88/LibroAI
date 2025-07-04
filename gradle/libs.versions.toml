@@ -4,6 +4,7 @@ checkout = "1.6.26"
 deCircleimageview = "3.1.0"
 firebaseBom = "33.16.0"
 generativeai = "0.2.1"
+glide = "4.16.0"
 googleFirebaseAuth = "22.3.0"
 googleMaterial = "1.10.0"
 googleServices = "4.4.3"
@@ -20,8 +21,11 @@ firebaseAuth = "23.2.1"
 firebaseFirestore = "25.1.4"
 moshi = "1.16.0"
 moshiKotlin = "1.16.0"
+moshiKotlinVersion = "1.15.0"
+moshiVersion = "1.15.0"
 okhttp = "4.11.0"
 generativeaiVersion = "0.9.0"
+firebaseDatabase = "21.0.0"
 
 [libraries]
 checkout = { module = "com.razorpay:checkout", version.ref = "checkout" }
@@ -29,6 +33,7 @@ de-circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "d
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 generativeai = { module = "com.google.ai.client:generativeai", version.ref = "generativeai" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 google-firebase-auth-v2230 = { module = "com.google.firebase:firebase-auth", version.ref = "googleFirebaseAuth" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -44,8 +49,11 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
+moshi-kotlin-v1150 = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlinVersion" }
+moshi-v1150 = { module = "com.squareup.moshi:moshi", version.ref = "moshiVersion" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 google-generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeaiVersion" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

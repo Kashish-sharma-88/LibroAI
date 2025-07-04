@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:padding="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="#FDF5E6"
+        android:padding="16dp"
+        android:layout_marginTop="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- 🏷️ Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📚 Add Your Library"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#5D4037"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 🏫 Library Name -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Library Name"
+                android:textColor="#5D4037"
+                android:paddingLeft="10dp"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/libraryName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter library name"
+                android:drawableEnd="@drawable/books"
+                android:textColor="#5D4037"
+                android:textColorHint="#9E9E9E"
+                android:padding="14dp"
+                android:textSize="16sp" />
+
+            <!-- 🏠 Address -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Full Address"
+                android:textColor="#5D4037"
+                android:textSize="15sp"
+                android:layout_marginTop="12dp"
+                android:paddingLeft="10dp" />
+
+            <EditText
+                android:id="@+id/libraryAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter address"
+                android:drawableEnd="@drawable/marker"
+                android:textColor="#5D4037"
+                android:textColorHint="#9E9E9E"
+                android:padding="14dp"
+                android:textSize="16sp" />
+
+            <!-- 📍 Area -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Area"
+                android:textColor="#5D4037"
+                android:textSize="15sp"
+                android:layout_marginTop="12dp"
+                android:paddingLeft="10dp" />
+
+            <EditText
+                android:id="@+id/libraryArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="e.g., Barra, Kakadeo"
+                android:drawableEnd="@drawable/land_location"
+                android:textColor="#5D4037"
+                android:textColorHint="#9E9E9E"
+                android:padding="14dp"
+                android:textSize="16sp" />
+
+            <!-- 📞 Mobile -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mobile Number"
+                android:textColor="#5D4037"
+                android:textSize="15sp"
+                android:layout_marginTop="12dp"
+                android:paddingLeft="10dp" />
+
+            <EditText
+                android:id="@+id/libraryMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter mobile number"
+                android:drawableEnd="@drawable/phone_rotary"
+                android:textColor="#5D4037"
+                android:textColorHint="#9E9E9E"
+                android:inputType="phone"
+                android:padding="14dp"
+                android:textSize="16sp" />
+
+            <!-- ✅ Submit Button -->
+            <Button
+                android:id="@+id/submitLibraryBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit Library"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="#5D4037"
+                android:textColor="#FFFDE7"
+                android:layout_marginTop="24dp"
+                android:padding="14dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</ScrollView>

@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LibroAi"
         tools:targetApi="31">
+
         <activity
             android:name=".MapActivity"
             android:exported="false" />
@@ -41,7 +42,50 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> <!-- Dashboard Activity (you mentioned it's named MainActivity2) -->
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" /> <!-- Bottom Navigation Activities -->
+        <activity
+            android:name=".DoubtsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FollowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DiscussionsForumsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LibraryListActivity"
+            android:exported="false" /> <!-- Navigation Drawer Activities -->
+        <activity
+            android:name=".AvailableBooksActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IssuedBooksActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookmarksActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity android:name=".book_list" android:exported="false"/>
+        <activity android:name=".liberay_book" android:exported="false"> </activity>
+        <activity android:name=".liberary_item" android:exported="false"/>
+        <activity android:name=".liberarian" android:exported="false"/>
+        <activity android:name=".liberary_list" android:exported="false"/>
+        <activity android:name=".Librarian_Dasboard" android:exported="false"/>
+
     </application>
 
 </manifest>

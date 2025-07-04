@@ -60,13 +60,37 @@ public class LoginActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            finish();
+                            String uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+                            com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                                    .collection("users")
+                                    .document(uid)
+                                    .get()
+                                    .addOnSuccessListener(documentSnapshot -> {
+                                        if (documentSnapshot.exists()) {
+                                            String roleFromDB = documentSnapshot.getString("role");
+
+                                            if ("student".equals(role)) {
+                                                startActivity(new Intent(LoginActivity.this, MainActivity2.class));
+                                            } else if ("librarian".equals(role)) {
+                                                startActivity(new Intent(LoginActivity.this, Librarian_Dasboard.class));
+                                            } else {
+                                                Toast.makeText(this, "Unknown role: " + roleFromDB, Toast.LENGTH_SHORT).show();
+                                                return;
+                                            }
+
+                                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(this, "User data not found in Firestore", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(e ->
+                                            Toast.makeText(this, "Failed to fetch role: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                         } else {
                             Toast.makeText(LoginActivity.this, "Login Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         }
+
                     });
         });
 
@@ -79,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Forgot password (optional)
         forgotPasswordLink.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class); // you can create this later
+            Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
             startActivity(intent);
         });
     }

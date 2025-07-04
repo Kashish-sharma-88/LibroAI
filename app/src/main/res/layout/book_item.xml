@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:backgroundTint="#FFFFFF"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <!-- 📖 Book Image -->
+        <ImageView
+            android:id="@+id/bookImage"
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_2"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/image_rounded" />
+
+        <!-- 📚 Book Info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- 🏷️ Title -->
+            <TextView
+                android:id="@+id/bookTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book Title"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#4E342E"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <!-- ✍️ Author -->
+            <TextView
+                android:id="@+id/bookAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="by Author Name"
+                android:textSize="14sp"
+                android:textColor="#795548"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <!-- 📄 Description -->
+            <TextView
+                android:id="@+id/bookDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Short description about the book goes here."
+                android:textSize="13sp"
+                android:textColor="#5D4037"
+                android:layout_marginTop="8dp"
+                android:maxLines="3"
+                android:ellipsize="end" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

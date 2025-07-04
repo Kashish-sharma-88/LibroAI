@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    android:padding="8dp"
+    app:cardBackgroundColor="#C2B280"
+    android:elevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Main Content -->
+        <LinearLayout
+            android:id="@+id/libraryInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="80dp">
+
+            <!-- 🖼️ Circular Logo -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/libraryLogo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/logo"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/CircleImage"
+                android:contentDescription="Library Logo"/>
+
+            <!-- 📘 Text Details -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/libraryName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Library Name"
+                    android:textStyle="bold"
+                    android:textColor="#8B5B29"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/libraryAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Library Address"
+                    android:textColor="#8B5B29"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp" />
+
+                <TextView
+                    android:id="@+id/libraryArea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Area"
+                    android:textColor="#8B5B29"
+                    android:textSize="13sp"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/libraryMobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile Number"
+                    android:textColor="#8B5B29"
+                    android:textSize="13sp"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ✅ Enter Button -->
+        <Button
+            android:id="@+id/enterLibraryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="Enter"
+            android:textAllCaps="false"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:backgroundTint="#8B5B29"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:elevation="2dp"
+            android:drawableEnd="@drawable/arrow_right"
+            android:drawablePadding="6dp" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

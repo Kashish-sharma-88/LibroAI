@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_dashboard"
+        android:title="📊 Dashboard" />
+
+    <item
+        android:id="@+id/nav_books"
+        android:title="📚 Books" />
+
+    <item
+        android:id="@+id/nav_users"
+        android:title="👥 Users" />
+
+    <item
+        android:id="@+id/nav_issued"
+        android:title="📖 Issued Books" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:title="🚪 Logout" />
+</menu>
