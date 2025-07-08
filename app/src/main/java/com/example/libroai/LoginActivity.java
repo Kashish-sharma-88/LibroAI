@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
@@ -21,11 +22,10 @@ public class LoginActivity extends AppCompatActivity {
     EditText emailInput, passwordInput;
     Button loginBtn;
     LinearLayout signUpLink;
-
     TextView forgotPasswordLink;
 
     FirebaseAuth mAuth;
-
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.passwordInput);
         loginBtn = findViewById(R.id.loginBtn);
         signUpLink = findViewById(R.id.signup);
-        forgotPasswordLink=findViewById(R.id.forgotPasswordLink);
+        forgotPasswordLink = findViewById(R.id.forgotPasswordLink);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
         String role = getIntent().getStringExtra("userType");
 
         loginBtn.setOnClickListener(view -> {
@@ -56,27 +58,31 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             String uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-                            com.google.firebase.firestore.FirebaseFirestore.getInstance()
-                                    .collection("users")
+                            db.collection("users")
                                     .document(uid)
                                     .get()
                                     .addOnSuccessListener(documentSnapshot -> {
                                         if (documentSnapshot.exists()) {
                                             String roleFromDB = documentSnapshot.getString("role");
+                                            Boolean isApproved = documentSnapshot.getBoolean("approved");
 
-                                            if ("student".equals(role)) {
+                                            if (!Boolean.TRUE.equals(isApproved)) {
+                                                Toast.makeText(this, "Account not approved yet by admin", Toast.LENGTH_SHORT).show();
+                                                mAuth.signOut();
+                                                return;
+                                            }
+
+                                            if ("student".equals(roleFromDB)) {
                                                 startActivity(new Intent(LoginActivity.this, MainActivity2.class));
-                                            } else if ("librarian".equals(role)) {
+                                            } else if ("librarian".equals(roleFromDB)) {
                                                 startActivity(new Intent(LoginActivity.this, Librarian_Dasboard.class));
                                             } else {
                                                 Toast.makeText(this, "Unknown role: " + roleFromDB, Toast.LENGTH_SHORT).show();
-                                                return;
                                             }
 
                                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -85,12 +91,12 @@ public class LoginActivity extends AppCompatActivity {
                                             Toast.makeText(this, "User data not found in Firestore", Toast.LENGTH_SHORT).show();
                                         }
                                     })
-                                    .addOnFailureListener(e ->
-                                            Toast.makeText(this, "Failed to fetch role: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(this, "Failed to fetch role: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
                         } else {
-                            Toast.makeText(LoginActivity.this, "Login Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Login Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         }
-
                     });
         });
 
@@ -101,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
-        // Forgot password (optional)
         forgotPasswordLink.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
             startActivity(intent);

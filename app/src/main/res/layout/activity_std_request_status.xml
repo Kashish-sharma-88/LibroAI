@@ -1,17 +1,29 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/beige_bg">
+    android:background="#FFF6E9">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#5C3D2E"
+        app:titleTextColor="#F5E9DA"
+        app:title="My Library Requests" />
+
+    <!-- RecyclerView for Student Requests -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view_requests"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/beige_bg"
         android:padding="8dp"
-        android:clipToPadding="false"/>
-    <!--  Empty State  -->
+        android:clipToPadding="false" />
+
+    <!-- Empty State -->
     <LinearLayout
         android:id="@+id/empty_state"
         android:layout_width="match_parent"
@@ -20,26 +32,23 @@
         android:gravity="center"
         android:visibility="gone"
         android:padding="20dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📚"
-            android:textSize="60sp"
-            android:layout_marginBottom="16dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Books Available"
+            android:text="No Library Requests"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#4B2C20"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No books are currently available in the library."
+            android:text="You haven't sent any library join requests yet."
             android:textSize="16sp"
             android:textColor="#666666"
-            android:gravity="center"/>
+            android:gravity="center" />
     </LinearLayout>
-</LinearLayout>
+
+</LinearLayout> 

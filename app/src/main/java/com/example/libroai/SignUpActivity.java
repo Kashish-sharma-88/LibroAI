@@ -46,7 +46,6 @@ public class SignUpActivity extends AppCompatActivity {
         loginLinkLayout = findViewById(R.id.loginLinkLayout);
         forgotPasswordLink = findViewById(R.id.forgotPasswordLink);
 
-
         signupBtn.setOnClickListener(v -> {
             String name = nameInput.getText().toString().trim();
             String email = emailInput.getText().toString().trim();
@@ -70,34 +69,35 @@ public class SignUpActivity extends AppCompatActivity {
                 return;
             }
 
-
             mAuth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             String uid = mAuth.getCurrentUser().getUid();
 
-                            // Save data in Firestore
                             Map<String, Object> userData = new HashMap<>();
                             userData.put("name", name);
                             userData.put("email", email);
                             userData.put("role", role);
-                            userData.put("approved", role.equals("student")); // students are auto-approved, librarians not
+                            userData.put("approved", "student".equals(role)); // auto-approved for student only
 
                             db.collection("users").document(uid).set(userData)
                                     .addOnSuccessListener(unused -> {
                                         Toast.makeText(this, "Account created 🎉", Toast.LENGTH_SHORT).show();
 
-                                        // Redirect based on role
                                         if ("student".equals(role)) {
                                             startActivity(new Intent(this, MainActivity2.class));
                                         } else if ("librarian".equals(role)) {
-                                            startActivity(new Intent(this, Librarian_Dasboard.class));
+                                            Toast.makeText(this, "Signup successful! Please fill your library details.", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(this, LibraryDetailsFormActivity.class);
+                                            intent.putExtra("uid", uid);
+                                            intent.putExtra("email", email);
+                                            startActivity(intent);
+                                            finish();
                                         } else {
                                             Toast.makeText(this, "Unknown role", Toast.LENGTH_SHORT).show();
                                         }
 
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                        finish();
                                     })
                                     .addOnFailureListener(e ->
                                             Toast.makeText(this, "Failed to save user: " + e.getMessage(), Toast.LENGTH_SHORT).show()
@@ -108,14 +108,12 @@ public class SignUpActivity extends AppCompatActivity {
                     });
         });
 
-
         loginLinkLayout.setOnClickListener(v -> {
             Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
             intent.putExtra("userType", role);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
-
 
         forgotPasswordLink.setOnClickListener(v -> {
             Intent intent = new Intent(SignUpActivity.this, ForgetPasswordActivity.class);

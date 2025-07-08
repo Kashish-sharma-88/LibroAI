@@ -8,14 +8,18 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class liberay_book extends AppCompatActivity {
 
     EditText bookTitle, bookAuthor, bookDesc, bookImage;
     AppCompatButton addBookBtn;
-    DatabaseReference bookRef;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +33,7 @@ public class liberay_book extends AppCompatActivity {
         bookImage = findViewById(R.id.bookImage);
         addBookBtn = findViewById(R.id.loginBtn);
 
-        bookRef = FirebaseDatabase.getInstance().getReference("books");
+        db = FirebaseFirestore.getInstance();
 
         // ➕ Add Book
         addBookBtn.setOnClickListener(v -> {
@@ -43,16 +47,36 @@ public class liberay_book extends AppCompatActivity {
                 return;
             }
 
-            String bookId = bookRef.push().getKey();
-            BookModel book = new BookModel(bookId, title, author, desc, image);
+            // Create book data for Firestore
+            Map<String, Object> book = new HashMap<>();
+            book.put("title", title);
+            book.put("author", author);
+            book.put("description", desc.isEmpty() ? "No description available" : desc);
+            book.put("imageUrl", image.isEmpty() ? "" : image);
+            book.put("status", "Available");
+            book.put("addedDate", Timestamp.now());
+            book.put("category", "General"); // Default category
 
-            bookRef.child(bookId).setValue(book)
-                    .addOnSuccessListener(unused -> {
+            // Save to Firestore
+            db.collection("Available_Book")
+                    .add(book)
+                    .addOnSuccessListener(documentReference -> {
+                        // ✅ Student side done
                         Toast.makeText(this, "📚 Book Added Successfully!", Toast.LENGTH_SHORT).show();
                         clearFields();
+
+                        // ✅ Also push to admin path
+                        String libraryId = FirebaseAuth.getInstance().getCurrentUser().getUid();;
+
+                        db.collection("approved_libraries")
+                                .document(libraryId)
+                                .collection("books")
+                                .add(book); // same book map used
                     })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(this, "❌ Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "❌ Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
         });
     }
 

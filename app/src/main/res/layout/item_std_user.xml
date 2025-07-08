@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- User Avatar -->
+        <FrameLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_profile"
+                android:background="@drawable/circle_bg"
+                android:padding="12dp"
+                android:scaleType="fitCenter" />
+
+            <!-- User Type Badge -->
+            <TextView
+                android:id="@+id/user_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/user_type_badge"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                android:text="👤 Student"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+        <!-- User Info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="12dp">
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="user@email.com"
+                android:textSize="14sp"
+                android:textColor="@color/gray"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/library_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🏛️ Library Name"
+                android:textSize="12sp"
+                android:textColor="@color/brown"
+                android:textStyle="italic"
+                android:visibility="gone"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/user_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User bio description"
+                android:textSize="13sp"
+                android:textColor="@color/dark_gray"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:visibility="gone"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:id="@+id/followers_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0 followers"
+                android:textSize="12sp"
+                android:textColor="@color/gray"
+                android:drawableStart="@drawable/followers_icon"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <!-- Follow Button -->
+        <Button
+            android:id="@+id/follow_button"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Follow +"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/follow_button_gradient"
+            android:minWidth="80dp"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView> 

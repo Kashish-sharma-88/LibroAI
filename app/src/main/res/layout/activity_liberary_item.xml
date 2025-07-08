@@ -3,39 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    app:cardCornerRadius="12dp"
-    android:padding="8dp"
-    app:cardBackgroundColor="#C2B280"
-    android:elevation="4dp">
+    android:layout_marginBottom="16dp"
+    android:layout_marginHorizontal="4dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="12dp"
+    android:backgroundTint="#FFFFFF">
 
-    <RelativeLayout
+    <!-- Card Background with Pattern -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card_pattern_bg">
 
-        <!-- Main Content -->
+        <!-- Header Section with Library Icon -->
         <LinearLayout
-            android:id="@+id/libraryInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="80dp">
+            android:padding="20dp"
+            android:gravity="center_vertical">
 
-            <!-- 🖼️ Circular Logo -->
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/libraryLogo"
+            <!-- Library Icon Container -->
+            <LinearLayout
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/logo"
-                android:layout_marginEnd="16dp"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/CircleImage"
-                android:contentDescription="Library Logo"/>
+                android:background="@drawable/library_icon_bg"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
 
-            <!-- 📘 Text Details -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📚"
+                    android:textSize="24sp"/>
+
+            </LinearLayout>
+
+            <!-- Library Info -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -47,56 +52,89 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Library Name"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="#8B5B29"
-                    android:textSize="17sp" />
+                    android:textColor="#2C1810"
+                    android:layout_marginBottom="4dp"/>
 
                 <TextView
                     android:id="@+id/libraryAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Library Address"
-                    android:textColor="#8B5B29"
+                    android:text="📍 Library Address"
                     android:textSize="14sp"
-                    android:layout_marginTop="4dp" />
-
-                <TextView
-                    android:id="@+id/libraryArea"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Area"
-                    android:textColor="#8B5B29"
-                    android:textSize="13sp"
-                    android:layout_marginTop="2dp" />
+                    android:textColor="#5C3D2E"
+                    android:layout_marginBottom="2dp"/>
 
                 <TextView
                     android:id="@+id/libraryMobile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mobile Number"
-                    android:textColor="#8B5B29"
+                    android:text="📞 Mobile Number"
                     android:textSize="13sp"
-                    android:layout_marginTop="2dp" />
+                    android:textColor="#8B7355"/>
+
             </LinearLayout>
+
         </LinearLayout>
 
-        <!-- ✅ Enter Button -->
-        <Button
-            android:id="@+id/enterLibraryButton"
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:text="Enter"
-            android:textAllCaps="false"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="12dp"
-            android:backgroundTint="#8B5B29"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:elevation="2dp"
-            android:drawableEnd="@drawable/arrow_right"
-            android:drawablePadding="6dp" />
-    </RelativeLayout>
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0"
+            android:layout_marginHorizontal="20dp"/>
+
+        <!-- Action Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <!-- Library Stats -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📖 1000+ Books"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:layout_marginEnd="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👥 500+ Members"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+            </LinearLayout>
+
+            <!-- Join Button -->
+            <Button
+                android:id="@+id/enterLibraryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Join Now ✨"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:background="@drawable/join_button_gradient"
+                android:textColor="#FFFFFF"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:elevation="4dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>

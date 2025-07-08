@@ -103,7 +103,7 @@ public class MainActivity2 extends AppCompatActivity {
             int id = item.getItemId();
             if      (id == R.id.nav_home)      return true;
             else if (id == R.id.nav_doubts)    { startActivity(new Intent(this, DoubtsActivity.class));    return true; }
-            else if (id == R.id.nav_follow)    { startActivity(new Intent(this, FollowActivity.class));    return true; }
+            else if (id == R.id.nav_follow)    { startActivity(new Intent(this, StdFollowActivity.class));    return true; }
             else if (id == R.id.nav_library)   { startActivity(new Intent(this, LibraryListActivity.class)); return true; }
             else if (id == R.id.nav_forums)    { startActivity(new Intent(this, DiscussionsForumsActivity.class)); return true; }
             return false;
@@ -146,21 +146,21 @@ public class MainActivity2 extends AppCompatActivity {
     /* ---------- Sample data ---------- */
     private List<Book> sampleTopFree() {
         List<Book> list = new ArrayList<>();
-        list.add(new Book("Free Book 1", "Author A", "Fiction",  "Free"));
-        list.add(new Book("Free Book 2", "Author B", "Fantasy",  "Free"));
-        list.add(new Book("Free Book 3", "Author C", "Romance",  "Free"));
+        list.add(new Book("Free Book 1", "Author A", "Fiction",  "Free"));
+        list.add(new Book("Free Book 2", "Author B", "Fantasy",  "Free"));
+        list.add(new Book("Free Book 3", "Author C", "Romance",  "Free"));
         return list;
     }
     private List<Book> sampleTopPaid() {
         List<Book> list = new ArrayList<>();
-        list.add(new Book("Paid Book 1", "Author D", "Sci‑Fi",  "$3.99"));
-        list.add(new Book("Paid Book 2", "Author E", "History", "$2.49"));
+        list.add(new Book("Paid Book 1", "Author D", "Sci‑Fi",  "$3.99"));
+        list.add(new Book("Paid Book 2", "Author E", "History", "$2.49"));
         return list;
     }
     private List<Book> sampleTrending() {
         List<Book> list = new ArrayList<>();
-        list.add(new Book("Trending 1", "Author F", "Mystery",    "Trending"));
-        list.add(new Book("Trending 2", "Author G", "Adventure",  "Trending"));
+        list.add(new Book("Trending 1", "Author F", "Mystery",    "Trending"));
+        list.add(new Book("Trending 2", "Author G", "Adventure",  "Trending"));
         return list;
     }
 
@@ -180,6 +180,7 @@ public class MainActivity2 extends AppCompatActivity {
         else if (id == R.id.notifications)    startActivity(new Intent(this, NotificationsActivity.class));
         else if (id == R.id.bookmarks)        startActivity(new Intent(this, BookmarksActivity.class));
         else if (id == R.id.map)        startActivity(new Intent(this, MapActivity.class));
+        else if (id == R.id.library_requests) startActivity(new Intent(this, StdRequestStatusActivity.class));
         else if (id == R.id.notes)            startActivity(new Intent(this, NotesActivity.class));
         else if (id == R.id.feedback)         startActivity(new Intent(this, FeedbackActivity.class));
         else if (id == R.id.settings)         startActivity(new Intent(this, SettingsActivity.class));

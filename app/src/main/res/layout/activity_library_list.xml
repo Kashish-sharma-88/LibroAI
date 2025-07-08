@@ -3,44 +3,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/beige_bg">
+    android:orientation="vertical">
 
-    <!-- Header with Back Button -->
+    <!-- Modern Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
-
-        <ImageView
-            android:id="@+id/back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/back_arrow"
-            android:contentDescription="Back"
-            android:layout_marginEnd="16dp"/>
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@drawable/header_gradient">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Library List"
-            android:textSize="24sp"
+            android:text="📚"
+            android:textSize="40sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discover Libraries"
+            android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="@color/brown_primary"
-            android:gravity="center"/>
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Find and join amazing libraries near you"
+            android:textSize="16sp"
+            android:textColor="#E8E8E8"
+            android:layout_gravity="center_horizontal"
+            android:alpha="0.9"/>
 
     </LinearLayout>
 
-    <!-- RecyclerView for Library List -->
+    <!-- Library Count Badge -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/count_badge_bg"
+        android:padding="12dp"
+        android:elevation="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔍"
+            android:textSize="18sp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/library_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 Libraries Available"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#5C3D2E"/>
+
+    </LinearLayout>
+
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/library_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/beige_bg"
-        android:padding="8dp"
-        android:clipToPadding="false" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="20dp"
+        android:scrollbars="none"/>
 
 </LinearLayout>

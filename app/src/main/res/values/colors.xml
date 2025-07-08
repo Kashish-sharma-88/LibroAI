@@ -35,4 +35,7 @@
     <color name="btn_brown">#5D3A1A</color>
     <!--  Button background  -->
     <color name="text_button">#FFFFFF</color>
+    <!--  Follow Section Colors  -->
+    <color name="brown">#8B4513</color>
+    <color name="dark_gray">#666666</color>
 </resources>

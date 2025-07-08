@@ -1,11 +1,16 @@
 package com.example.libroai;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +18,25 @@ public class LibraryListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private libraryAdapter adapter;
     private List<library> libraryList;
+    private TextView libraryCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library_list);
 
+        // Check if user is logged in
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         recyclerView = findViewById(R.id.library_recycler_view);
-        ImageView backButton = findViewById(R.id.back_button);
+        libraryCount = findViewById(R.id.library_count);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -29,12 +45,19 @@ public class LibraryListActivity extends AppCompatActivity {
         adapter = new libraryAdapter(libraryList);
         recyclerView.setAdapter(adapter);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        // Update library count
+        if (libraryCount != null) {
+            libraryCount.setText(libraryList.size() + " Libraries Available");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Refresh the adapter when activity resumes to show updated status
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void initializeLibraryData() {

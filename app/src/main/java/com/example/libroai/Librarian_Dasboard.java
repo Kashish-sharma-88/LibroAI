@@ -21,7 +21,7 @@ public class Librarian_Dasboard extends AppCompatActivity {
     private NavigationView navigationView;
     private Toolbar toolbar;
 
-    private CardView cardAddLibrary, cardDelivery, cardAddBook,cardmanagebooks;
+    private CardView cardAddLibrary, cardDelivery, cardAddBook,cardmanagebooks, libAcceptRequestsCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,10 @@ public class Librarian_Dasboard extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         cardmanagebooks = findViewById(R.id.manage);
         cardDelivery = findViewById(R.id.card_delivery);
-        cardAddBook = findViewById(R.id.add_books); // Make sure this ID exists in XML
+        cardAddBook = findViewById(R.id.add_books);
+
+
+        libAcceptRequestsCard = findViewById(R.id.lib_accept_requests_card);
 
         // Setup Toolbar
         setSupportActionBar(toolbar);
@@ -80,11 +83,17 @@ public class Librarian_Dasboard extends AppCompatActivity {
             }
         });
 
-
         cardAddBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Librarian_Dasboard.this, liberay_book.class));
+            }
+        });
+
+        libAcceptRequestsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Librarian_Dasboard.this, JoinRequestsActivity.class));
             }
         });
     }

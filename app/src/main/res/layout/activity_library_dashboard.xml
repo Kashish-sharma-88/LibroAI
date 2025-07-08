@@ -204,6 +204,7 @@
                 <!-- Functional Cards -->
                 <include layout="@layout/card_add_books" />
                 <include layout="@layout/item_card_manage_books" />
+                <!-- Accept Student Requests Card -->
                 <include layout="@layout/item_card_accept_requests" />
                 <include layout="@layout/item_card_manage_issued" />
                 <include layout="@layout/item_card_records" />
