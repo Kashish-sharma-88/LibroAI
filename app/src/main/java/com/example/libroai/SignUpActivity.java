@@ -85,7 +85,9 @@ public class SignUpActivity extends AppCompatActivity {
                                         Toast.makeText(this, "Account created 🎉", Toast.LENGTH_SHORT).show();
 
                                         if ("student".equals(role)) {
-                                            startActivity(new Intent(this, MainActivity2.class));
+                                            Intent intent = new Intent(SignUpActivity.this, SetupProfileActivity.class);
+                                            intent.putExtra("userId", uid); // pass user ID
+                                            startActivity(intent);
                                         } else if ("librarian".equals(role)) {
                                             Toast.makeText(this, "Signup successful! Please fill your library details.", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(this, LibraryDetailsFormActivity.class);

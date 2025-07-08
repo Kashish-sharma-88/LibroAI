@@ -1,5 +1,7 @@
 package com.example.libroai;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
 
     private List<StdUserModel> userList;
     private String currentUserId;
+    private Context context;
 
     public StdFollowAdapter(List<StdUserModel> userList, String currentUserId) {
         this.userList = userList;
@@ -28,19 +31,19 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_std_user, parent, false);
+        context = parent.getContext(); // save context to use for Intent
+        View view = LayoutInflater.from(context).inflate(R.layout.item_std_user, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         StdUserModel user = userList.get(position);
-        
+
         holder.userName.setText(user.getUserName());
         holder.userEmail.setText(user.getUserEmail());
-        
-        // Set user type and library info
+
+        // User Type
         if ("librarian".equals(user.getUserType())) {
             holder.userType.setText("📚 Librarian");
             if (user.getLibraryName() != null && !user.getLibraryName().isEmpty()) {
@@ -53,28 +56,26 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
             holder.userType.setText("👤 Student");
             holder.libraryInfo.setVisibility(View.GONE);
         }
-        
-        // Set bio
+
+        // Bio
         if (user.getUserBio() != null && !user.getUserBio().isEmpty()) {
             holder.userBio.setText(user.getUserBio());
             holder.userBio.setVisibility(View.VISIBLE);
         } else {
             holder.userBio.setVisibility(View.GONE);
         }
-        
-        // Set followers count
+
+        // Followers count
         holder.followersCount.setText(user.getFollowersCount() + " followers");
-        
-        // Set follow button state
+
+        // Follow button state
         if (currentUserId.isEmpty()) {
-            // User not logged in - disable follow button
-            holder.followButton.setText("Login to Follow");
+            holder.followButton.setText("Follow");
             holder.followButton.setBackgroundResource(R.drawable.following_button_bg);
             holder.followButton.setEnabled(false);
         } else {
             updateFollowButton(holder.followButton, user.isFollowing());
-            
-            // Handle follow button click
+
             holder.followButton.setOnClickListener(v -> {
                 if (user.isFollowing()) {
                     unfollowUser(user, holder.followButton);
@@ -83,6 +84,17 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
                 }
             });
         }
+
+        // 👉 Card click = open profile
+        holder.itemView.setOnClickListener(v -> {
+            if (!currentUserId.isEmpty()) {
+                Intent intent = new Intent(context, UserProfileActivity.class);
+                intent.putExtra("userId", user.getUserId());
+                context.startActivity(intent);
+            } else {
+                Toast.makeText(context, "Login to view profile", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -106,67 +118,55 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
     }
 
     private void followUser(StdUserModel user, Button button) {
-        if (currentUserId.isEmpty()) {
-            Toast.makeText(button.getContext(), "Please login to follow users", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        
         DatabaseReference followRef = FirebaseDatabase.getInstance()
                 .getReference("follows")
                 .child(currentUserId)
                 .child(user.getUserId());
-        
+
         followRef.setValue(true)
                 .addOnSuccessListener(aVoid -> {
                     user.setFollowing(true);
                     user.setFollowersCount(user.getFollowersCount() + 1);
-                    
-                    // Update user's followers count in Firebase
+
                     FirebaseDatabase.getInstance()
                             .getReference("users")
                             .child(user.getUserId())
                             .child("followersCount")
                             .setValue(user.getFollowersCount());
-                    
+
                     notifyDataSetChanged();
-                    Toast.makeText(button.getContext(), 
+                    Toast.makeText(button.getContext(),
                             "Started following " + user.getUserName(), Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(button.getContext(), 
+                    Toast.makeText(button.getContext(),
                             "Failed to follow: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
     private void unfollowUser(StdUserModel user, Button button) {
-        if (currentUserId.isEmpty()) {
-            Toast.makeText(button.getContext(), "Please login to unfollow users", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        
         DatabaseReference followRef = FirebaseDatabase.getInstance()
                 .getReference("follows")
                 .child(currentUserId)
                 .child(user.getUserId());
-        
+
         followRef.removeValue()
                 .addOnSuccessListener(aVoid -> {
                     user.setFollowing(false);
                     user.setFollowersCount(Math.max(0, user.getFollowersCount() - 1));
-                    
-                    // Update user's followers count in Firebase
+
                     FirebaseDatabase.getInstance()
                             .getReference("users")
                             .child(user.getUserId())
                             .child("followersCount")
                             .setValue(user.getFollowersCount());
-                    
+
                     notifyDataSetChanged();
-                    Toast.makeText(button.getContext(), 
+                    Toast.makeText(button.getContext(),
                             "Unfollowed " + user.getUserName(), Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(button.getContext(), 
+                    Toast.makeText(button.getContext(),
                             "Failed to unfollow: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
@@ -186,4 +186,4 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
             followButton = itemView.findViewById(R.id.follow_button);
         }
     }
-} 
+}

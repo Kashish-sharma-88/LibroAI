@@ -15,6 +15,12 @@
         android:theme="@style/Theme.LibroAi"
         tools:targetApi="31">
         <activity
+            android:name=".SetupProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".LibraryDetailsFormActivity"
             android:exported="false" />
         <activity
@@ -86,7 +92,7 @@
             android:exported="false" />
         <activity
             android:name=".liberay_book"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".liberary_item"
             android:exported="false" />
@@ -99,10 +105,18 @@
         <activity
             android:name=".Librarian_Dasboard"
             android:exported="false" />
-        <activity android:name=".LibAcceptRequestsActivity" android:exported="false"/>
-        <activity android:name=".StdRequestStatusActivity" android:exported="false"/>
-        <activity android:name=".StdFollowActivity" android:exported="false"/>
-        <activity android:name=".JoinRequestsActivity" android:exported="false"/>
+        <activity
+            android:name=".LibAcceptRequestsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StdRequestStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StdFollowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".JoinRequestsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

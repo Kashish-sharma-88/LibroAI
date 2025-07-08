@@ -1,61 +1,59 @@
 package com.example.libroai;
 
 public class StdUserModel {
-    
+
     private String userId;
-    private String userName;
-    private String userEmail;
-    private String userType; // "student" or "librarian"
+    private String name;
+    private String email;
+    private String role;
     private String userImage;
-    private String userBio;
-    private String libraryName; // for librarians
+    private String bio;
+    private String libraryName;
     private boolean isFollowing;
     private int followersCount;
     private int followingCount;
 
-    // Required empty constructor for Firebase
-    public StdUserModel() {
-    }
+    // Required empty constructor
+    public StdUserModel() {}
 
-    // Parameterized constructor
-    public StdUserModel(String userId, String userName, String userEmail, String userType, 
-                       String userImage, String userBio, String libraryName, 
-                       boolean isFollowing, int followersCount, int followingCount) {
+    public StdUserModel(String userId, String name, String email, String role,
+                        String userImage, String bio, String libraryName,
+                        boolean isFollowing, int followersCount, int followingCount) {
         this.userId = userId;
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userType = userType;
+        this.name = name;
+        this.email = email;
+        this.role = role;
         this.userImage = userImage;
-        this.userBio = userBio;
+        this.bio = bio;
         this.libraryName = libraryName;
         this.isFollowing = isFollowing;
         this.followersCount = followersCount;
         this.followingCount = followingCount;
     }
 
-    // Getter methods
+    // Firestore mapped fields
     public String getUserId() {
         return userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public String getUserType() {
-        return userType;
+    public String getRole() {
+        return role;
     }
 
     public String getUserImage() {
         return userImage;
     }
 
-    public String getUserBio() {
-        return userBio;
+    public String getBio() {
+        return bio;
     }
 
     public String getLibraryName() {
@@ -74,29 +72,29 @@ public class StdUserModel {
         return followingCount;
     }
 
-    // Setter methods
+    // Setters
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setUserImage(String userImage) {
         this.userImage = userImage;
     }
 
-    public void setUserBio(String userBio) {
-        this.userBio = userBio;
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public void setLibraryName(String libraryName) {
@@ -114,4 +112,21 @@ public class StdUserModel {
     public void setFollowingCount(int followingCount) {
         this.followingCount = followingCount;
     }
-} 
+
+    // Adapter Compatibility 👇
+    public String getUserName() {
+        return name; // Match your adapter
+    }
+
+    public String getUserEmail() {
+        return email; // Match your adapter
+    }
+
+    public String getUserType() {
+        return role; // Match your adapter
+    }
+
+    public String getUserBio() {
+        return bio; // Match your adapter
+    }
+}
