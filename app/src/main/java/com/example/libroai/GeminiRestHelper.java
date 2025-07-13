@@ -1,23 +1,24 @@
 package com.example.libroai;
 
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
 import okhttp3.*;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;  // ✅ Add this import
 import com.example.libroai.BuildConfig;
-
 
 public class GeminiRestHelper {
 
     private static final String ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
 
-    private final OkHttpClient client = new OkHttpClient();
+    // ⏱️ Timeout settings added here
+    private final OkHttpClient client = new OkHttpClient.Builder()
+            .connectTimeout(20, TimeUnit.SECONDS)  // connect timeout
+            .writeTimeout(20, TimeUnit.SECONDS)    // write request timeout
+            .readTimeout(30, TimeUnit.SECONDS)     // read response timeout
+            .build();
 
     public interface ResponseCallback {
         void onResponse(String text);
@@ -42,7 +43,7 @@ public class GeminiRestHelper {
             Request request = new Request.Builder()
                     .url(ENDPOINT)
                     .post(requestBody)
-                    .addHeader("Authorization", "Bearer " + BuildConfig.OPENROUTER_API_KEY) // 🔐 from gradle
+                    .addHeader("Authorization", "Bearer " + BuildConfig.OPENROUTER_API_KEY)
                     .addHeader("HTTP-Referer", "https://libroai.example")
                     .addHeader("X-Title", "LibroAI")
                     .build();
