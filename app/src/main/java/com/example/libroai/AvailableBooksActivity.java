@@ -1,7 +1,10 @@
 package com.example.libroai;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -21,24 +24,44 @@ public class AvailableBooksActivity extends BaseDrawerActivity {
     private RecyclerView recyclerView;
     private com.example.libroai.bookAdapter bookAdapter;
     private List<Book> books;
+    ImageView backbtn;
     private LinearLayout emptyState;
     private FirebaseFirestore db;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Set the layout, title, and drawer menu item
-        setContent(R.layout.activity_available_books, "Available Books", R.id.available_books);
+        setContentView(R.layout.activity_available_books);
 
         db = FirebaseFirestore.getInstance();
         books = new ArrayList<>();
 
         recyclerView = findViewById(R.id.recycler_view);
         emptyState = findViewById(R.id.empty_state);
+        backbtn=findViewById(R.id.issueback);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         bookAdapter = new bookAdapter(books);
         recyclerView.setAdapter(bookAdapter);
+
+        bookAdapter.setOnBookClickListener(book -> {
+            Intent intent = new Intent(AvailableBooksActivity.this, StdBookDetailActivity.class);
+            intent.putExtra("title", book.getTitle());
+            intent.putExtra("author", book.getAuthor());
+            intent.putExtra("imageUrl", "https://via.placeholder.com/180x240.png?text=Book+Image");
+            intent.putExtra("description", book.getDescription()); // ✅ This is correct
+            startActivity(intent);
+        });
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
         // Fetch books from Firestore
         fetchAvailableBooks();
@@ -66,7 +89,7 @@ public class AvailableBooksActivity extends BaseDrawerActivity {
             String category = document.getString("category");
 
             if (title != null && author != null) {
-                Book book = new Book(title, author, category != null ? category : "General", status != null ? status : "Available");
+                Book book = new Book(title, author, description, category != null ? category : "General", status != null ? status : "Available");
                 books.add(book);
             }
         }

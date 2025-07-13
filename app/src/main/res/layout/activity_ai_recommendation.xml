@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#E3D4B9"
     tools:context=".AiRecommendationActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header_gradient"
+        android:elevation="4dp"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <!-- Title -->
     <TextView
@@ -13,19 +21,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="📚 Book AI Recommender"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="#000"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="16dp"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/titleText"
+        android:layout_below="@id/toolbar"
         android:layout_above="@+id/inputLayout"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -43,19 +53,19 @@
         android:layout_alignParentBottom="true"
         android:background="#FFFFFF"
         android:elevation="6dp"
-        android:layout_marginBottom="5dp"
         android:gravity="center_vertical">
 
         <EditText
             android:id="@+id/userInput"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Ask about books..."
-            android:background="@drawable/edittext_bg"
-            android:paddingHorizontal="16dp"
-            android:textColor="#000"
-            android:textColorHint="#888"
+            android:hint="Type a message..."
+            android:background="@drawable/edittext_rounded"
+            android:padding="12dp"
+            android:textSize="14sp"
+            android:maxLines="4"
+            android:inputType="textMultiLine|textCapSentences"
             android:layout_marginEnd="8dp" />
 
         <ImageView
@@ -73,7 +83,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/send"
-            android:padding="6dp"
+            android:padding="8dp"
             android:background="@drawable/circle_bg"
             android:contentDescription="Send" />
     </LinearLayout>

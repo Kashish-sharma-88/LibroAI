@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/header_gradient">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/back"
+                android:contentDescription="Back"
+                android:layout_marginEnd="16dp"
+                android:tint="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Community Discussions"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <!-- Search Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/search_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:hint="Search discussions..."
+                android:background="@drawable/edittext_rounded"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textSize="14sp"
+                android:drawableStart="@drawable/search"
+                android:drawablePadding="8dp"/>
+
+            <Spinner
+                android:id="@+id/category_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/edittext_rounded"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"/>
+
+        </LinearLayout>
+
+        <!-- Posts RecyclerView -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/posts_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="8dp" />
+
+            <LinearLayout
+                android:id="@+id/empty_state_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="32dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/doubts"
+                    android:layout_marginBottom="24dp"
+                    android:alpha="0.6"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Discussions Yet"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/brown_primary"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Be the first to start a discussion!"
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <!-- Floating Action Button -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_ask_doubt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:src="@drawable/add_icon"
+                android:backgroundTint="@color/brown_primary"
+                android:tint="#FFFFFF"
+                android:contentDescription="Ask a doubt"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</FrameLayout> 

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/reply_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    android:backgroundTint="#F8F9FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Header with User Info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <!-- User Avatar -->
+            <LinearLayout
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/circle_bg2"
+                android:gravity="center"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👤"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+            <!-- User Info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/reply_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Name"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/brown_primary"/>
+
+                <TextView
+                    android:id="@+id/reply_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 hour ago"
+                    android:textSize="11sp"
+                    android:textColor="#666666"/>
+
+            </LinearLayout>
+
+            <!-- Accept Button -->
+            <TextView
+                android:id="@+id/reply_accept_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accept"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_approve_bg"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <!-- Reply Content -->
+        <TextView
+            android:id="@+id/reply_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reply content goes here..."
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Accepted Badge -->
+        <TextView
+            android:id="@+id/reply_accepted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✓ Accepted Answer"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#4CAF50"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView> 

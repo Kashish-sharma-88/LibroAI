@@ -12,10 +12,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.ViewHolder> {
 
@@ -31,7 +34,7 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context = parent.getContext(); // save context to use for Intent
+        context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.item_std_user, parent, false);
         return new ViewHolder(view);
     }
@@ -44,7 +47,7 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
         holder.userEmail.setText(user.getUserEmail());
 
         // User Type
-        if ("librarian".equals(user.getUserType())) {
+        if ("librarian".equalsIgnoreCase(user.getUserType())) {
             holder.userType.setText("📚 Librarian");
             if (user.getLibraryName() != null && !user.getLibraryName().isEmpty()) {
                 holder.libraryInfo.setText("🏛️ " + user.getLibraryName());
@@ -71,12 +74,12 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
         // Follow button state
         if (currentUserId.isEmpty()) {
             holder.followButton.setText("Follow");
-            holder.followButton.setBackgroundResource(R.drawable.following_button_bg);
             holder.followButton.setEnabled(false);
         } else {
             updateFollowButton(holder.followButton, user.isFollowing());
 
             holder.followButton.setOnClickListener(v -> {
+                holder.followButton.setEnabled(false); // prevent double click
                 if (user.isFollowing()) {
                     unfollowUser(user, holder.followButton);
                 } else {
@@ -85,7 +88,6 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
             });
         }
 
-        // 👉 Card click = open profile
         holder.itemView.setOnClickListener(v -> {
             if (!currentUserId.isEmpty()) {
                 Intent intent = new Intent(context, UserProfileActivity.class);
@@ -109,7 +111,7 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
 
     private void updateFollowButton(Button button, boolean isFollowing) {
         if (isFollowing) {
-            button.setText("Following ✓");
+            button.setText("Unfollow");
             button.setBackgroundResource(R.drawable.following_button_bg);
         } else {
             button.setText("Follow +");
@@ -118,56 +120,65 @@ public class StdFollowAdapter extends RecyclerView.Adapter<StdFollowAdapter.View
     }
 
     private void followUser(StdUserModel user, Button button) {
-        DatabaseReference followRef = FirebaseDatabase.getInstance()
-                .getReference("follows")
-                .child(currentUserId)
-                .child(user.getUserId());
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        followRef.setValue(true)
+        if (firebaseUser == null) {
+            Toast.makeText(button.getContext(), "User not authenticated", Toast.LENGTH_SHORT).show();
+            button.setEnabled(true);
+            return;
+        }
+
+        String currentUserEmail = firebaseUser.getEmail();
+        String currentUserName = firebaseUser.getDisplayName(); // You can also store this in Firestore if not available
+
+        Map<String, Object> requestData = new HashMap<>();
+        requestData.put("senderId", currentUserId);
+        requestData.put("senderEmail", currentUserEmail);
+        requestData.put("senderName", currentUserName != null ? currentUserName : "User");
+        requestData.put("timestamp", System.currentTimeMillis());
+
+        firestore.collection("users")
+                .document(user.getUserId())
+                .collection("followRequests")
+                .document(currentUserId)
+                .set(requestData)
                 .addOnSuccessListener(aVoid -> {
                     user.setFollowing(true);
-                    user.setFollowersCount(user.getFollowersCount() + 1);
-
-                    FirebaseDatabase.getInstance()
-                            .getReference("users")
-                            .child(user.getUserId())
-                            .child("followersCount")
-                            .setValue(user.getFollowersCount());
-
                     notifyDataSetChanged();
-                    Toast.makeText(button.getContext(),
-                            "Started following " + user.getUserName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(button.getContext(), "Follow request sent to " + user.getUserName(), Toast.LENGTH_SHORT).show();
+                    button.setEnabled(true);
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(button.getContext(),
-                            "Failed to follow: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(button.getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    button.setEnabled(true);
                 });
     }
 
     private void unfollowUser(StdUserModel user, Button button) {
-        DatabaseReference followRef = FirebaseDatabase.getInstance()
-                .getReference("follows")
-                .child(currentUserId)
-                .child(user.getUserId());
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-        followRef.removeValue()
+        firestore.collection("follows")
+                .document(currentUserId)
+                .collection("following")
+                .document(user.getUserId())
+                .delete()
                 .addOnSuccessListener(aVoid -> {
+                    firestore.collection("follows")
+                            .document(user.getUserId())
+                            .collection("followers")
+                            .document(currentUserId)
+                            .delete();
+
                     user.setFollowing(false);
                     user.setFollowersCount(Math.max(0, user.getFollowersCount() - 1));
-
-                    FirebaseDatabase.getInstance()
-                            .getReference("users")
-                            .child(user.getUserId())
-                            .child("followersCount")
-                            .setValue(user.getFollowersCount());
-
                     notifyDataSetChanged();
-                    Toast.makeText(button.getContext(),
-                            "Unfollowed " + user.getUserName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(button.getContext(), "Unfollowed " + user.getUserName(), Toast.LENGTH_SHORT).show();
+                    button.setEnabled(true);
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(button.getContext(),
-                            "Failed to unfollow: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(button.getContext(), "Failed to unfollow: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    button.setEnabled(true);
                 });
     }
 

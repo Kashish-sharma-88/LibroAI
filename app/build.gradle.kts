@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.application")
-    id("com.google.gms.google-services")
+    id ("com.android.application")
+    id ("com.google.gms.google-services")
 
 }
 
@@ -13,6 +13,7 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+        multiDexEnabled= true
         val openRouterKey = project.findProperty("OPENROUTER_API_KEY") ?: ""
         buildConfigField("String", "OPENROUTER_API_KEY", "\"$openRouterKey\"")
 
@@ -61,9 +62,18 @@ dependencies {
     implementation (libs.de.circleimageview)
     implementation(libs.google.generativeai)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.glide)
+    implementation (libs.glide.v4151)
+    implementation (libs.multidex)
+    implementation (libs.firebase.ui.firestore)
+    implementation (libs.firebase.firestore.v2444)
+    implementation (libs.imagepicker)
+    implementation (libs.com.google.firebase.firebase.storage)
+    implementation (libs.google.firebase.firestore)
+    implementation("com.github.dhaval2404:imagepicker:2.1")
 
 }

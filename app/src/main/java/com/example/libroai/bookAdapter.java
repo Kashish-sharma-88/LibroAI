@@ -6,12 +6,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.text.BreakIterator;
 import java.util.List;
 
 public class bookAdapter extends RecyclerView.Adapter<bookAdapter.BookViewHolder> {
     private List<Book> books;
+    private OnBookClickListener listener;
+
+    public interface OnBookClickListener {
+        void onBookClick(Book book);
+    }
+
+    public void setOnBookClickListener(OnBookClickListener listener) {
+        this.listener = listener;
+    }
 
     public bookAdapter(List<Book> books) {
         this.books = books;
@@ -31,6 +38,12 @@ public class bookAdapter extends RecyclerView.Adapter<bookAdapter.BookViewHolder
         holder.authorText.setText(book.getAuthor());
         holder.categoryText.setText(book.getCategory());
         holder.statusText.setText(book.getStatus());
+        holder.descriptionText.setText(book.getDescription());
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onBookClick(book);
+            }
+        });
     }
 
     @Override
@@ -39,11 +52,7 @@ public class bookAdapter extends RecyclerView.Adapter<bookAdapter.BookViewHolder
     }
 
     static class BookViewHolder extends RecyclerView.ViewHolder {
-        public BreakIterator bookAuthor;
-        public BreakIterator bookTitle;
-        public BreakIterator bookDesc;
-        public Object bookImage;
-        TextView titleText, authorText, categoryText, statusText;
+        TextView titleText, authorText, categoryText, statusText, descriptionText;
 
         BookViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -51,6 +60,7 @@ public class bookAdapter extends RecyclerView.Adapter<bookAdapter.BookViewHolder
             authorText = itemView.findViewById(R.id.author_text);
             categoryText = itemView.findViewById(R.id.category_text);
             statusText = itemView.findViewById(R.id.status_text);
+            descriptionText = itemView.findViewById(R.id.desc_text);
         }
     }
 }

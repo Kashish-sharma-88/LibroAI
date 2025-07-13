@@ -1,12 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgforliberary"
+    android:background="@color/bg_light"
     android:orientation="vertical"
     android:padding="16dp">
-    <!--  🔍 Search Bar with CardView  -->
+
+    <!-- 🔍 Search Bar with CardView -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,10 +32,10 @@
             android:textColor="#212121"
             android:textColorHint="#9E9E9E"
             android:textSize="15sp"
-            android:inputType="text"/>
-
+            android:inputType="text" />
     </androidx.cardview.widget.CardView>
-    <!--  📚 RecyclerView for Library Cards  -->
+
+    <!-- 📚 RecyclerView for Library Cards -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/libraryRecyclerView"
         android:layout_width="match_parent"
@@ -42,5 +44,7 @@
         android:layout_marginTop="8dp"
         android:clipToPadding="false"
         android:paddingBottom="8dp"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
+
 </LinearLayout>
+

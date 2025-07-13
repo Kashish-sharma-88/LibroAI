@@ -21,8 +21,7 @@ public class DiscussionForumsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        joinGroupButton = findViewById(R.id.join_group_button);
-        createGroupButton = findViewById(R.id.create_group_button);
+
 
         ImageView backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {

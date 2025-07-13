@@ -1,1 +1,16 @@
-/build
+# Android Studio
+.gradle/
+.idea/
+build/
+*.iml
+
+# Signing keys and local config
+*.jks
+*.keystore
+local.properties
+apikeys.properties
+gradle.properties
+
+# OS / Misc
+.DS_Store
+*.log

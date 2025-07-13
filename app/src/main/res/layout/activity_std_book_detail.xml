@@ -109,5 +109,13 @@
             app:backgroundTint="@null"
             android:textColor="@color/text_button"
             android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First Issued The Book Then You Can Buy It Or Rent It"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 </ScrollView> 

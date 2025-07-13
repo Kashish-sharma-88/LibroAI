@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/beige_bg">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/header_gradient">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:contentDescription="Back"
+            android:layout_marginEnd="16dp"
+            android:tint="#FFFFFF"/>
+
+        <TextView
+            android:id="@+id/post_title_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Discussion"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+        <ImageView
+            android:id="@+id/resolve_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/check"
+            android:contentDescription="Mark as Resolved"
+            android:tint="#FFFFFF"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Original Post Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Post Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/circle_bg"
+                            android:gravity="center"
+                            android:layout_marginEnd="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="👤"
+                                android:textSize="18sp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/detail_user_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="User Name"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/brown_primary"/>
+
+                            <TextView
+                                android:id="@+id/detail_post_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2 hours ago"
+                                android:textSize="12sp"
+                                android:textColor="#666666"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/detail_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="● Open"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:background="@drawable/status_pending_bg"/>
+
+                    </LinearLayout>
+
+                    <!-- Post Title -->
+                    <TextView
+                        android:id="@+id/detail_post_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Post Title"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/brown_primary"
+                        android:layout_marginBottom="8dp"/>
+
+                    <!-- Post Content -->
+                    <TextView
+                        android:id="@+id/detail_post_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Post content goes here..."
+                        android:textSize="14sp"
+                        android:textColor="#333333"
+                        android:layout_marginBottom="12dp"/>
+
+                    <!-- Category Badge -->
+                    <TextView
+                        android:id="@+id/detail_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="General"
+                        android:textSize="12sp"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/button_light"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Replies Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Replies"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_primary"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Replies RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/replies_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Reply Input Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp">
+
+        <EditText
+            android:id="@+id/reply_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Write your reply..."
+            android:background="@drawable/edittext_rounded"
+            android:padding="12dp"
+            android:textSize="14sp"
+            android:maxLines="3"
+            android:minHeight="40dp"/>
+
+        <ImageView
+            android:id="@+id/send_reply_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/send"
+            android:background="@drawable/circle_bg"
+            android:padding="8dp"
+            android:contentDescription="Send Reply"/>
+
+    </LinearLayout>
+
+</LinearLayout> 

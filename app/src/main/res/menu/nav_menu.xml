@@ -13,8 +13,8 @@
         android:title="👥 Users" />
 
     <item
-        android:id="@+id/nav_issued"
-        android:title="📖 Issued Books" />
+        android:id="@+id/nav_orders"
+        android:title="Manage Student Orders" />
 
     <item
         android:id="@+id/nav_logout"

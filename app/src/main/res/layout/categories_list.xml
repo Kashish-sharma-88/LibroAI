@@ -94,5 +94,26 @@
                 android:textSize="12sp"
                 android:gravity="center"/>
         </LinearLayout>
+
+        <!-- Others -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/finance"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Others"
+                android:textColor="@color/brown_primary"
+                android:textSize="12sp"
+                android:gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
 </HorizontalScrollView>

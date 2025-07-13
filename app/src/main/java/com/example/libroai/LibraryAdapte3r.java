@@ -10,7 +10,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 class libraryAdapter extends RecyclerView.Adapter<libraryAdapter.LibraryViewHolder> {
     private final List<library> libraryList;
@@ -42,6 +55,7 @@ class libraryAdapter extends RecyclerView.Adapter<libraryAdapter.LibraryViewHold
         private final TextView libraryAddress;
         private final TextView libraryMobile;
         private final Button joinButton;
+        private ValueEventListener statusListener;
 
         public LibraryViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,23 +71,126 @@ class libraryAdapter extends RecyclerView.Adapter<libraryAdapter.LibraryViewHold
             libraryAddress.setText(library.getAddress());
             libraryMobile.setText(library.getMobileNumber());
 
-            if (library.isJoined()) {
-                joinButton.setText("Joined");
-                joinButton.setEnabled(false);
-            } else {
-                joinButton.setText("Join Library");
-                joinButton.setEnabled(true);
+            // Remove previous listener if exists
+            if (statusListener != null) {
+                FirebaseDatabase.getInstance().getReference("student_requests").removeEventListener(statusListener);
             }
+
+            // Check if user has already sent a request for this library
+            checkExistingRequest(library);
 
             joinButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    library.setJoined(true);
-                    joinButton.setText("Joined");
-                    joinButton.setEnabled(false);
-                    Toast.makeText(v.getContext(), "Successfully joined " + library.getName(), Toast.LENGTH_SHORT).show();
+                    // Send join request to Firebase
+                    sendJoinRequest(library);
                 }
             });
+        }
+
+        private void checkExistingRequest(library library) {
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser == null) {
+                // User not logged in, show default button state
+                updateButtonStatus(false, "", library);
+                return;
+            }
+
+            // Check for existing requests in Firestore
+            com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                    .collection("join_request")
+                    .whereEqualTo("studentId", currentUser.getUid())
+                    .whereEqualTo("libraryName", library.getName())
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        boolean hasRequest = false;
+                        String requestStatus = "";
+
+                        for (com.google.firebase.firestore.QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            JoinRequestModel request = document.toObject(JoinRequestModel.class);
+                            if (request != null) {
+                                hasRequest = true;
+                                requestStatus = request.getStatus();
+                                break;
+                            }
+                        }
+
+                        updateButtonStatus(hasRequest, requestStatus, library);
+                    })
+                    .addOnFailureListener(e -> {
+                        // Handle error - show default button state
+                        updateButtonStatus(false, "", library);
+                    });
+        }
+
+        private void updateButtonStatus(boolean hasRequest, String status, library library) {
+            if (hasRequest) {
+                library.setJoined(true);
+                joinButton.setEnabled(false);
+
+                switch (status.toLowerCase()) {
+                    case "pending":
+                        joinButton.setText("⏳ Pending");
+                        joinButton.setBackgroundResource(R.drawable.status_pending_bg);
+                        break;
+                    case "approved":
+                        joinButton.setText("✅ Approved");
+                        joinButton.setBackgroundResource(R.drawable.button_approve_bg);
+                        break;
+                    case "rejected":
+                        joinButton.setText("❌ Rejected");
+                        joinButton.setBackgroundResource(R.drawable.button_reject_bg);
+                        break;
+                    default:
+                        joinButton.setText("Join Now ✨");
+                        joinButton.setBackgroundResource(R.drawable.join_button_gradient);
+                        joinButton.setEnabled(true);
+                        break;
+                }
+            } else {
+                library.setJoined(false);
+                joinButton.setText("Join Now ✨");
+                joinButton.setEnabled(true);
+                joinButton.setBackgroundResource(R.drawable.join_button_gradient);
+            }
+        }
+
+        private void sendJoinRequest(library library) {
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser == null) {
+                Toast.makeText(itemView.getContext(), "Please login first", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Generate request ID
+            String requestId = "req_" + System.currentTimeMillis();
+
+            // Create request model for Firestore
+            JoinRequestModel request = new JoinRequestModel(
+                    requestId,
+                    currentUser.getUid(),
+                    currentUser.getDisplayName() != null ? currentUser.getDisplayName() : "Student",
+                    currentUser.getEmail(),
+                    library.getName(), // Using library name as ID for now
+                    library.getName(),
+                    "pending",
+                    "Student wants to join this library",
+                    com.google.firebase.Timestamp.now()
+            );
+
+            // Save to Firestore
+            com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                    .collection("join_request")
+                    .document(requestId)
+                    .set(request)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(itemView.getContext(),
+                                "Request sent successfully!", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(itemView.getContext(),
+                                "Failed to send request: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
         }
     }
 } 

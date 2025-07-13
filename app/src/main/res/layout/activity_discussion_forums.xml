@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/beige_bg">
 
-    <!-- Header with Back Button -->
+    <!-- Enhanced Header with Gradient Background -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/header_gradient"
+        android:elevation="4dp">
+
+        <!-- Top Bar with Back Button -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,11 +24,14 @@
 
         <ImageView
             android:id="@+id/back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
             android:src="@drawable/back_arrow"
             android:contentDescription="Back"
-            android:layout_marginEnd="16dp"/>
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/circle_bg"
+                android:padding="4dp"
+                android:tint="@color/white"/>
 
         <TextView
             android:layout_width="0dp"
@@ -28,12 +40,26 @@
             android:text="Discussion Forums"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/brown_primary"
+                android:textColor="@color/white"
             android:gravity="center"/>
 
     </LinearLayout>
 
-    <!-- Buttons Section -->
+        <!-- Welcome Message -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Connect with fellow students and share knowledge"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:alpha="0.9"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="16dp"/>
+
+    </LinearLayout>
+
+    <!-- Action Cards Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,27 +67,140 @@
         android:padding="16dp"
         android:gravity="center">
 
-        <Button
-            android:id="@+id/join_group_button"
+        <!-- Browse Groups Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/browse_groups_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Join Group"
-            android:textColor="@color/white"
-            android:background="@color/brown_primary"
             android:layout_marginEnd="8dp"
-            android:padding="12dp" />
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            android:backgroundTint="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
-        <Button
-            android:id="@+id/create_group_button"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/list"
+                    android:layout_marginBottom="12dp"
+                    android:tint="@color/brown_primary"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Browse Groups"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/brown_primary"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Join existing study groups"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Create Group Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/create_group_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Create Group"
-            android:textColor="@color/white"
-            android:background="@color/brown_primary"
             android:layout_marginStart="8dp"
-            android:padding="12dp" />
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            android:backgroundTint="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/user_writer"
+                    android:layout_marginBottom="12dp"
+                    android:tint="@color/brown_primary"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            android:text="Create Group"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/brown_primary"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start your own community"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <!-- Section Title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:gravity="center_vertical">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="20dp"
+            android:background="@color/brown_primary"
+            android:layout_marginEnd="12dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Available Groups"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/brown_primary"/>
+
+        <TextView
+            android:id="@+id/group_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 groups"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:background="@drawable/count_badge_bg"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"/>
 
     </LinearLayout>
 
@@ -69,9 +208,70 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/beige_bg"
-        android:padding="8dp"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="8dp"
         android:clipToPadding="false" />
+
+    <!-- Enhanced Empty State -->
+    <LinearLayout
+        android:id="@+id/empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            card_view:cardCornerRadius="100dp"
+            card_view:cardElevation="8dp"
+            android:backgroundTint="@color/white"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/forums"
+                    android:alpha="0.6"
+                    android:tint="@color/brown_primary"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Groups Yet"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/brown_primary"
+            android:gravity="center"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/empty_state_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Be the first to create a study group and connect with fellow students!"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:paddingHorizontal="16dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

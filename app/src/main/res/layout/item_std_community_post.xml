@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/post_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header with User Info and Status -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <!-- User Avatar -->
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle_bg"
+                android:gravity="center"
+                android:layout_marginEnd="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👤"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <!-- User Info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/post_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Name"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/brown_primary"/>
+
+                <TextView
+                    android:id="@+id/post_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2 hours ago"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+            </LinearLayout>
+
+            <!-- Status Badge -->
+            <TextView
+                android:id="@+id/post_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● Open"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:background="@drawable/status_pending_bg"/>
+
+        </LinearLayout>
+
+        <!-- Post Title -->
+        <TextView
+            android:id="@+id/post_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Post Title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/brown_primary"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Post Content with Background -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_rounded"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/post_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Post content goes here..."
+                android:textSize="15sp"
+                android:textColor="#333333"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="4"
+                android:ellipsize="end"/>
+
+        </LinearLayout>
+
+        <!-- Footer with Category and Reply Count -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Category Badge -->
+            <TextView
+                android:id="@+id/post_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="General"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_light"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"/>
+
+            <!-- Reply Count -->
+            <TextView
+                android:id="@+id/post_reply_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="5 replies"
+                android:textSize="12sp"
+                android:textColor="#666666"
+                android:gravity="end"
+                android:drawableStart="@drawable/messages"
+                android:drawablePadding="4dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView> 

@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -61,19 +60,9 @@ public class liberay_book extends AppCompatActivity {
             db.collection("Available_Book")
                     .add(book)
                     .addOnSuccessListener(documentReference -> {
-                        // ✅ Student side done
                         Toast.makeText(this, "📚 Book Added Successfully!", Toast.LENGTH_SHORT).show();
                         clearFields();
-
-                        // ✅ Also push to admin path
-                        String libraryId = FirebaseAuth.getInstance().getCurrentUser().getUid();;
-
-                        db.collection("approved_libraries")
-                                .document(libraryId)
-                                .collection("books")
-                                .add(book); // same book map used
                     })
-
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "❌ Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });

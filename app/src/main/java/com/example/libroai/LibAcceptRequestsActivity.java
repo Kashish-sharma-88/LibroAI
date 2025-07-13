@@ -1,5 +1,6 @@
 package com.example.libroai;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -36,7 +37,7 @@ public class LibAcceptRequestsActivity extends AppCompatActivity {
         emptyState = findViewById(R.id.empty_state);
         
         // Setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Toolbar toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             if (getSupportActionBar() != null) {

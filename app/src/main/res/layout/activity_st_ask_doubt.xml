@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/beige_bg">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/header_gradient">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:contentDescription="Back"
+            android:layout_marginEnd="16dp"
+            android:tint="#FFFFFF"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ask a Doubt"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <!-- Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Title Input -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_primary"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/title_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter a clear title for your doubt"
+                android:background="@drawable/edittext_rounded"
+                android:padding="16dp"
+                android:textSize="14sp"
+                android:maxLines="2"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Category Selection -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_primary"
+                android:layout_marginBottom="8dp"/>
+
+            <Spinner
+                android:id="@+id/category_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_rounded"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Content Input -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Describe your doubt"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_primary"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/content_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="Provide detailed description of your doubt..."
+                android:background="@drawable/edittext_rounded"
+                android:padding="16dp"
+                android:textSize="14sp"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Guidelines -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/guidelines_background"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Guidelines:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/brown_primary"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• Be specific and clear in your question\n• Provide relevant context\n• Be respectful to the community\n• Check if your question has been asked before"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:lineSpacingExtra="2dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Submit Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Post Doubt"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#906622"
+            android:textColor="#FFFFFF"
+            />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</LinearLayout> 

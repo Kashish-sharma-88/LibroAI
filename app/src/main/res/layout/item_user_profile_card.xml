@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/user_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginHorizontal="8dp"
+    android:elevation="4dp"
+    android:backgroundTint="@color/white"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kashish Sharma"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#2C2C2C" />
+
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="kashish@example.com"
+            android:textSize="14sp"
+            android:textColor="#777"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/user_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I love books and coding."
+            android:textSize="14sp"
+            android:textColor="#444"
+            android:layout_marginTop="6dp" />
+
+        <TextView
+            android:id="@+id/user_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👤 Student"
+            android:textSize="13sp"
+            android:textColor="#5D4037"
+            android:background="@drawable/role_badge"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="start" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

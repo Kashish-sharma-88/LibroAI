@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"
+        tools:ignore="PermissionImpliesUnsupportedChromeOsHardware" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="30" />
+
 
     <application
         android:allowBackup="true"
@@ -14,6 +19,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LibroAi"
         tools:targetApi="31">
+        <activity
+            android:name=".LibrarianOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StudentOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookRentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookBuyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FollowingListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FollowersListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FollowRequestActivity"
+            android:exported="false" />
         <activity
             android:name=".SetupProfileActivity"
             android:exported="false" />
@@ -36,9 +65,6 @@
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
@@ -54,9 +80,6 @@
         <activity
             android:name=".MainActivity2"
             android:exported="false" /> <!-- Bottom Navigation Activities -->
-        <activity
-            android:name=".DoubtsActivity"
-            android:exported="false" />
         <activity
             android:name=".FollowActivity"
             android:exported="false" />
@@ -116,6 +139,48 @@
             android:exported="false" />
         <activity
             android:name=".JoinRequestsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".libprofile"
+            android:exported="false" />
+        <activity
+            android:name=".LibUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".manage_books"
+            android:exported="false" />
+        <activity
+            android:name=".StdBookDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".libIssuedBookRequestsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StdJoinGroupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StdCreateGroupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StdGroupViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StdGroupChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StAskDoubtActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StdDoubtsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StdCommunityPostDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LibStudentRecordsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LibStudentDetailActivity"
             android:exported="false" />
     </application>
 

@@ -1,78 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawerLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!-- Main Content -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#F5E9DA">
-
-        <!-- ✅ Toolbar added here -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#5C3D2E"
-            android:elevation="4dp"
-            app:title="LibroAI"
-            app:titleTextColor="#FFFFFF" />
-
-        <!-- Custom Header -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="12dp"
-            android:background="#FFF"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/logo" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="LibroAI"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#4B2C20"
-                android:paddingStart="8dp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="end">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Librarian Name"
-                    android:textSize="12sp"
-                    android:textColor="#4B2C20" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Library Name"
-                    android:textSize="12sp"
-                    android:textColor="#4B2C20" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/img_3"
-                android:layout_marginStart="8dp" />
-        </LinearLayout>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/drawerLayout" android:layout_width="match_parent" android:layout_height="match_parent">
+<!--  Main Content  -->
+<LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="#F5E9DA">
+    <!--  ✅ Toolbar added here  -->
+    <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" android:background="#FFF" android:elevation="4dp" app:title="LibroAI" app:titleTextColor="#4B2C20">
+        <ImageView android:id="@+id/profile_image_toolbar" android:layout_width="28dp" android:layout_height="30dp" android:layout_gravity="end|center_vertical" android:src="@drawable/usersp" android:layout_marginEnd="12dp" android:layout_marginTop="6dp" android:background="@drawable/circle_bg" android:scaleType="centerCrop" android:cropToPadding="true"/>
+    </androidx.appcompat.widget.Toolbar>
 
         <!-- Scrollable Content with weight 1 to avoid overlap -->
         <ScrollView

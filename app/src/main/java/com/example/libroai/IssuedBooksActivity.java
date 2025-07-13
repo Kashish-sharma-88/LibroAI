@@ -1,18 +1,26 @@
 package com.example.libroai;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
 public class IssuedBooksActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private com.example.libroai.bookAdapter bookAdapter;
+    private FirebaseFirestore db;
+    ImageView backbtn;
+    private String currentStudentEmail = "student_123"; // Firestore ke document ke hisaab se
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +28,12 @@ public class IssuedBooksActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        backbtn = findViewById(R.id.issueback);
+        db = FirebaseFirestore.getInstance();
 
-        List<Book> books = getIssuedBooks();
-        bookAdapter = new bookAdapter(books);
-        recyclerView.setAdapter(bookAdapter);
+        fetchIssuedBooks();
 
-        ImageView backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -34,11 +41,27 @@ public class IssuedBooksActivity extends AppCompatActivity {
         });
     }
 
-    private List<Book> getIssuedBooks() {
-        List<Book> books = new ArrayList<>();
-        books.add(new Book("The Catcher in the Rye", "J.D. Salinger", "Fiction", "Issued"));
-        books.add(new Book("Lord of the Flies", "William Golding", "Fiction", "Issued"));
-        books.add(new Book("Animal Farm", "George Orwell", "Fiction", "Issued"));
-        return books;
+    private void fetchIssuedBooks() {
+        db.collection("Issued Books")
+            .whereEqualTo("studentId", currentStudentEmail)
+            .whereEqualTo("status", "approved")
+            .get()
+            .addOnSuccessListener(queryDocumentSnapshots -> {
+                List<Book> books = new ArrayList<>();
+                Log.d("IssuedBooksActivity", "DEBUG: Query size = " + queryDocumentSnapshots.size());
+                for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                    String title = doc.getString("bookTitle");
+                    String author = doc.getString("bookAuthor");
+                    String description = doc.getString("bookDescription");
+                    String category = "Issued"; // Or fetch from doc if available
+                    String status = "Issued";
+                    books.add(new Book(title, author, category, status , description));
+                }
+                bookAdapter = new bookAdapter(books);
+                recyclerView.setAdapter(bookAdapter);
+            })
+            .addOnFailureListener(e -> {
+                Log.e("IssuedBooksActivity", "Firestore query failed: ", e);
+            });
     }
 }

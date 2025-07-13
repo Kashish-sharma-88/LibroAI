@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/beige_bg">
+
+    <!-- Header with Back Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/header_gradient"
+        android:elevation="4dp">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/back_arrow"
+            android:contentDescription="Back"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/circle_bg"
+            android:padding="4dp"
+            app:tint="@color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Group Details"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <!-- Group Information Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/white"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Group Name and Category -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/group_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Study Group Name"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/brown_primary" />
+
+                <TextView
+                    android:id="@+id/category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Academic"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/category_badge_bg"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp" />
+
+            </LinearLayout>
+
+            <!-- Group Description -->
+            <TextView
+                android:id="@+id/group_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="This is a detailed description of the study group. Students can discuss various topics, share knowledge, and collaborate on projects."
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary"
+                android:lineSpacingExtra="4dp" />
+
+            <!-- Admin Information -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/info_item_bg"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/user_writer"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/admin_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Admin: John Doe"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary" />
+
+            </LinearLayout>
+
+            <!-- Member Count -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/info_item_bg"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/followers_icon"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/member_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="25 members"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Members Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Members Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:elevation="2dp">
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="20dp"
+                android:background="@color/brown_primary"
+                android:layout_marginEnd="12dp"/>
+
+            <TextView
+                android:id="@+id/members_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Members (0)"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_primary"/>
+
+        </LinearLayout>
+
+        <!-- Members List -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/members_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/beige_bg"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="8dp"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+
+</LinearLayout> 

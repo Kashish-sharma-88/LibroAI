@@ -2,68 +2,137 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDF5EC"
-    android:padding="24dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FAF6F2"
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/profile_avatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_profile"
-            android:background="@drawable/circle_bg"
-            android:padding="20dp"
+        <!-- Check Icon -->
+        <LinearLayout
+            android:id="@+id/follow_sent_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone">
+            <!-- Check Icon -->
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/check"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Success Text -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Follow Request Sent!"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#4E342E"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Subtext -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You’ve successfully sent a follow request to"
+                android:textSize="16sp"
+                android:textColor="#6D4C41"
+                android:layout_marginBottom="6dp" />
+        </LinearLayout>
+
+
+        <!-- Name -->
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name Placeholder"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#3E2723"
             android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- Profile Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/profile_name"
-            android:text="Kashish Sharma"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="#5C3D2E"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="24dp"
+                android:background="#FFFFFF">
+
+                <ImageView
+                    android:id="@+id/profile_avatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_profile"
+                    android:background="@drawable/circle_bg"
+                    android:padding="20dp"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:id="@+id/profile_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📧 Email"
+                    android:textSize="15sp"
+                    android:textColor="#6E5849"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/profile_role"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👩‍🎓 Role"
+                    android:textSize="14sp"
+                    android:textColor="#795548"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/profile_bio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📖 Bio"
+                    android:textSize="14sp"
+                    android:textColor="#5D4037"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/profile_library"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🏛 Library"
+                    android:textSize="14sp"
+                    android:textColor="#8D6E63" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Back Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_back"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/profile_email"
-            android:text="kashish@email.com"
+            android:text="Back to Home"
             android:textSize="16sp"
-            android:textColor="#9C8577"
-            android:layout_marginBottom="4dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/profile_role"
-            android:text="👩‍🎓 Student"
-            android:textSize="14sp"
-            android:textColor="#8A6F4D"
-            android:layout_marginBottom="8dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/profile_bio"
-            android:text="📖 Passionate reader, love coding and books!"
-            android:textSize="14sp"
-            android:textColor="#4A3C31"
-            android:layout_marginBottom="8dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/profile_library"
-            android:text="🏛️ Central Library"
-            android:textSize="14sp"
-            android:textColor="#6E5849" />
-
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/brown_button_bg"
+            android:padding="16dp" />
     </LinearLayout>
 </ScrollView>

@@ -1,12 +1,15 @@
 package com.example.libroai;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -20,20 +23,25 @@ public class StdBookDetailActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private String studentId = "student_123"; // TODO: Replace with real student id/email
     private String requestId = null;
-    private ListenerRegistration statusListener;
+    MaterialButton btnBuy , btnRent;
+    Button btnIssue;
 
+    private ListenerRegistration statusListener;
+    ImageView bookImage;
+    TextView bookTitle,bookAuthor, bookDesc ;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_std_book_detail);
 
-        ImageView bookImage = findViewById(R.id.book_image);
-        TextView bookTitle = findViewById(R.id.book_title);
-        TextView bookAuthor = findViewById(R.id.book_author);
-        TextView bookDesc = findViewById(R.id.book_desc);
-        Button btnBuy = findViewById(R.id.btn_buy);
-        Button btnRent = findViewById(R.id.btn_rent);
-        Button btnIssue = findViewById(R.id.btn_issue);
+         bookImage = findViewById(R.id.book_image);
+         bookTitle = findViewById(R.id.book_title);
+         bookAuthor = findViewById(R.id.book_author);
+         bookDesc = findViewById(R.id.book_desc);
+         btnBuy = findViewById(R.id.btn_buy);
+         btnRent = findViewById(R.id.btn_rent);
+         btnIssue = findViewById(R.id.btn_issue);
         // Remove status TextView logic
 
         Intent intent = getIntent();
@@ -41,6 +49,30 @@ public class StdBookDetailActivity extends AppCompatActivity {
         String author = intent.getStringExtra("author");
         String description = intent.getStringExtra("description");
         String imageUrl = intent.getStringExtra("imageUrl");
+
+        btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(StdBookDetailActivity.this,BookBuyActivity.class);
+                i.putExtra("title", title);
+                i.putExtra("author", author);
+                i.putExtra("description", description);
+                i.putExtra("imageUrl", imageUrl);
+                startActivity(i);
+            }
+        });
+
+        btnRent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(StdBookDetailActivity.this,BookRentActivity.class);
+                i.putExtra("title", title);
+                i.putExtra("author", author);
+                i.putExtra("description", description);
+                i.putExtra("imageUrl", imageUrl);
+                startActivity(i);
+            }
+        });
 
         bookTitle.setText(title);
         bookAuthor.setText(author);

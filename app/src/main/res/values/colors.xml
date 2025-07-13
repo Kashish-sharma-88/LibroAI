@@ -38,4 +38,8 @@
     <!--  Follow Section Colors  -->
     <color name="brown">#8B4513</color>
     <color name="dark_gray">#666666</color>
+    <color name="beige_card2">#fdf3e7</color>
+    <color name="brown_primary2">#5C3D2E</color>
+    <color name="brown_secondary">#8B6B4C</color>
+
 </resources>

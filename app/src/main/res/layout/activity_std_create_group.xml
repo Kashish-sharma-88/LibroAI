@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/beige_bg">
+
+    <!-- Header with Back Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:elevation="2dp">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back_arrow"
+            android:contentDescription="Back"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Create New Group"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/brown_primary"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <!-- Form Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/white"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Group Name Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Group Name *"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_primary"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/group_name_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter group name (min 3 characters)"
+                android:background="@drawable/edittext_rounded"
+                android:padding="16dp"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:inputType="textCapSentences"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Category Selection -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Category *"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_primary"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/category_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_rounded"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Group Description Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Group Description *"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_primary"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/group_description_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Describe your group (min 10 characters)"
+                android:background="@drawable/edittext_rounded"
+                android:padding="16dp"
+                android:textSize="14sp"
+                android:minLines="3"
+                android:maxLines="5"
+                android:inputType="textMultiLine|textCapSentences"
+                android:gravity="top"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Create Button -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/create_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Group"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/brown_button_bg"
+                android:padding="16dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Guidelines Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/white"
+        android:elevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Group Creation Guidelines:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_primary"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Choose a clear and descriptive group name"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Provide a detailed description of your group's purpose"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Select the most appropriate category"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Be respectful and follow community guidelines"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout> 
